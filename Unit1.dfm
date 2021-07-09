@@ -258,6 +258,7 @@ object Form1: TForm1
     Height = 25
     Caption = #1062#1080#1082#1083':'
     TabOrder = 8
+    OnClick = LoopButtonClick
   end
   object Block1: TPanel
     Left = 32
@@ -530,5 +531,21 @@ object Form1: TForm1
     Height = 21
     NumbersOnly = True
     TabOrder = 27
+  end
+  object ListBox1: TListBox
+    Left = 584
+    Top = 336
+    Width = 97
+    Height = 144
+    ItemHeight = 13
+    TabOrder = 28
+  end
+  object ListBox2: TListBox
+    Left = 712
+    Top = 336
+    Width = 97
+    Height = 144
+    ItemHeight = 13
+    TabOrder = 29
   end
 end

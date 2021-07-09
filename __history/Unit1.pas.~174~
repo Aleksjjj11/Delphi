@@ -39,6 +39,8 @@ type
     ResetButton: TButton;
     MinLoop: TEdit;
     MaxLoop: TEdit;
+    ListBox1: TListBox;
+    ListBox2: TListBox;
     procedure Button1Click(Sender: TObject);
     procedure RightButtonClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
@@ -46,6 +48,7 @@ type
     procedure LeftButtonClick(Sender: TObject);
     procedure PlusWagonButtonClick(Sender: TObject);
     procedure MinusWagonButtonClick(Sender: TObject);
+    procedure LoopButtonClick(Sender: TObject);
   private
     { Private declarations }
     //procedure CheckEnableLoop();
@@ -65,6 +68,10 @@ implementation
 
 procedure TForm1.Button1Click(Sender: TObject);
 begin
+  ListBox1.Items.Add('Ñ');
+  if Sender <> nil then
+    ListBox2.Items.AddPair(IntToStr(ListBox2.Count+1), 'C');
+
   Image1.Visible := not Image1.Visible;
   Image3.Visible := not Image3.Visible;
 end;
@@ -85,6 +92,10 @@ procedure TForm1.LeftButtonClick(Sender: TObject);
 var
   I: Integer;
 begin
+  ListBox1.Items.Add('Ë');
+  if Sender <> nil then
+    ListBox2.Items.AddPair(IntToStr(ListBox2.Count+1), 'Ë');
+
   RightButton.Enabled := true;
   MinusWagonButton.Enabled := true;
   LeftButton.Enabled := false;
@@ -99,21 +110,37 @@ begin
 
     for I := 1 to QCar do
     begin
-      case QP2 + I of
+      case QP1 + I of
         1:begin
+          Block1.Color := clNavy;
           Block1.Visible := true;
           Block1.Caption := IntToStr(pBlocksDeadLock[I]);
         end;
 
-
-        2: Block2.Visible := true;
-        3: Block3.Visible := true;
-        4: Block4.Visible := true;
-        5: Block5.Visible := true;
+        2:begin
+          Block2.Color := clNavy;
+          Block2.Visible := true;
+          Block2.Caption := IntToStr(pBlocksDeadLock[I]);
+        end;
+        3:begin
+          Block3.Color := clNavy;
+          Block3.Visible := true;
+          Block3.Caption := IntToStr(pBlocksDeadLock[I]);
+        end;
+        4:begin
+          Block4.Color := clNavy;
+          Block4.Visible := true;
+          Block4.Caption := IntToStr(pBlocksDeadLock[I]);
+        end;
+        5:begin
+          Block5.Color := clNavy;
+          Block5.Visible := true;
+          Block5.Caption := IntToStr(pBlocksDeadLock[I]);
+        end;
       end;
 
-      pBlocksDeadLock[I] := pBlocks2[QP2 + I];
-      pBlocks2[QP2 + I] := 0;
+      pBlocks1[QP1 + I] := pBlocksDeadLock[I];
+      pBlocksDeadLock[I] := 0;
     end;
   end
   else
@@ -122,9 +149,58 @@ begin
       PlusWagonButton.Enabled := true;
 
     Car3.Visible := true;
+
+    for I := 1 to QCar do
+    begin
+      case QP2 + I of
+        1:begin
+          Block6.Color := clNavy;
+          Block6.Visible := true;
+          Block6.Caption := IntToStr(pBlocksDeadLock[I]);
+        end;
+
+        2:begin
+          Block7.Color := clNavy;
+          Block7.Visible := true;
+          Block7.Caption := IntToStr(pBlocksDeadLock[I]);
+        end;
+        3:begin
+          Block8.Color := clNavy;
+          Block8.Visible := true;
+          Block8.Caption := IntToStr(pBlocksDeadLock[I]);
+        end;
+        4:begin
+          Block9.Color := clNavy;
+          Block9.Visible := true;
+          Block9.Caption := IntToStr(pBlocksDeadLock[I]);
+        end;
+        5:begin
+          Block10.Color := clNavy;
+          Block10.Visible := true;
+          Block10.Caption := IntToStr(pBlocksDeadLock[I]);
+        end;
+      end;
+
+      pBlocks2[QP2 + I] := pBlocksDeadLock[I];
+      pBlocksDeadLock[I] := 0;
+    end;
   end;
 
   car1.Visible := false;
+
+  for I := QCar downto 1 do
+    begin
+      if I = QCar then
+      begin
+        Block12.Caption := IntToStr(pBlocksDeadLock[I]);
+        Block12.Visible := false;
+      end
+      else
+      begin
+        Block11.Caption := IntToStr(pBlocksDeadLock[I]);
+        Block11.Visible := false;
+      end;
+    end;
 
   for I := 1 to 5 do
     if pBlocks2[I] <> I then
@@ -138,8 +214,28 @@ begin
 
 end;
 
+procedure TForm1.LoopButtonClick(Sender: TObject);
+var str : string;
+var I : integer;
+begin
+  for I := StrToInt(minLoop.Text) to StrToInt(maxLoop.Text) do
+  begin
+    if ListBox1.Items[I] = '+' then PlusWagonButtonClick(nil);
+    if ListBox1.Items[I] = '-' then MinusWagonButtonClick(nil);
+    if ListBox1.Items[I] = 'Ë' then LeftButtonClick(nil);
+    if ListBox1.Items[I] = 'Ï' then RightButtonClick(nil);
+    if ListBox1.Items[I] = 'C' then Button1Click(nil);
+    end;
+
+  ListBox2.Items.AddPair(IntToStr(ListBox2.Count+1), 'Ö' + ' ' + minLoop.Text + ' ' + maxLoop.Text);
+end;
+
 procedure TForm1.MinusWagonButtonClick(Sender: TObject);
 begin
+  ListBox1.Items.Add('-');
+  if Sender <> nil then
+    ListBox2.Items.AddPair(IntToStr(ListBox2.Count+1), '-');
+
   if Car2.Visible then
   begin
     if QCar > 0 then
@@ -180,6 +276,10 @@ end;
 
 procedure TForm1.PlusWagonButtonClick(Sender: TObject);
 begin
+  ListBox1.Items.Add('+');
+  if Sender <> nil then
+    ListBox2.Items.AddPair(IntToStr(ListBox2.Count+1), '+');
+
   if Car2.Visible then
   begin
     if (QP1 > 0) and (QCar < 2) then
@@ -286,14 +386,22 @@ begin
   RightButton.Enabled := false;
   LeftButton.Enabled := true;
   Button1.Enabled := true;
+
+  ListBox1.Items.Clear();
+  ListBox2.Items.Clear();
 end;
 
 procedure TForm1.RightButtonClick(Sender: TObject);
 var
   I: Integer;
 begin
+  ListBox1.Items.AddPair(IntToStr(ListBox2.Count+1), 'Ï');
+  if Sender <> nil then
+    ListBox2.Items.AddPair(IntToStr(ListBox2.Count+1), 'Ï');
+
   RightButton.Enabled := false;
   MinusWagonButton.Enabled := false;
+  PlusWagonButton.Enabled := false;
   LeftButton.Enabled := true;
   Button1.Enabled := true;
 

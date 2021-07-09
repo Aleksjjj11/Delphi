@@ -164,7 +164,6 @@ begin
           Block9.Caption := IntToStr(pBlocksDeadLock[I]);
         end;
         5:begin
-          Block10.Color := clNavy;
           Block10.Visible := true;
           Block10.Caption := IntToStr(pBlocksDeadLock[I]);
         end;
@@ -359,7 +358,6 @@ var
 begin
   RightButton.Enabled := false;
   MinusWagonButton.Enabled := false;
-  PlusWagonButton.Enabled := false;
   LeftButton.Enabled := true;
   Button1.Enabled := true;
 

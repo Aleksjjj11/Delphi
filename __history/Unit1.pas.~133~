@@ -99,37 +99,21 @@ begin
 
     for I := 1 to QCar do
     begin
-      case QP1 + I of
+      case QP2 + I of
         1:begin
-          Block1.Color := clNavy;
           Block1.Visible := true;
           Block1.Caption := IntToStr(pBlocksDeadLock[I]);
         end;
 
-        2:begin
-          Block2.Color := clNavy;
-          Block2.Visible := true;
-          Block2.Caption := IntToStr(pBlocksDeadLock[I]);
-        end;
-        3:begin
-          Block3.Color := clNavy;
-          Block3.Visible := true;
-          Block3.Caption := IntToStr(pBlocksDeadLock[I]);
-        end;
-        4:begin
-          Block4.Color := clNavy;
-          Block4.Visible := true;
-          Block4.Caption := IntToStr(pBlocksDeadLock[I]);
-        end;
-        5:begin
-          Block5.Color := clNavy;
-          Block5.Visible := true;
-          Block5.Caption := IntToStr(pBlocksDeadLock[I]);
-        end;
+
+        2: Block2.Visible := true;
+        3: Block3.Visible := true;
+        4: Block4.Visible := true;
+        5: Block5.Visible := true;
       end;
 
-      pBlocks1[QP1 + I] := pBlocksDeadLock[I];
-      pBlocksDeadLock[I] := 0;
+      pBlocksDeadLock[I] := pBlocks2[QP2 + I];
+      pBlocks2[QP2 + I] := 0;
     end;
   end
   else
@@ -138,58 +122,9 @@ begin
       PlusWagonButton.Enabled := true;
 
     Car3.Visible := true;
-
-    for I := 1 to QCar do
-    begin
-      case QP2 + I of
-        1:begin
-          Block6.Color := clNavy;
-          Block6.Visible := true;
-          Block6.Caption := IntToStr(pBlocksDeadLock[I]);
-        end;
-
-        2:begin
-          Block7.Color := clNavy;
-          Block7.Visible := true;
-          Block7.Caption := IntToStr(pBlocksDeadLock[I]);
-        end;
-        3:begin
-          Block8.Color := clNavy;
-          Block8.Visible := true;
-          Block8.Caption := IntToStr(pBlocksDeadLock[I]);
-        end;
-        4:begin
-          Block9.Color := clNavy;
-          Block9.Visible := true;
-          Block9.Caption := IntToStr(pBlocksDeadLock[I]);
-        end;
-        5:begin
-          Block10.Color := clNavy;
-          Block10.Visible := true;
-          Block10.Caption := IntToStr(pBlocksDeadLock[I]);
-        end;
-      end;
-
-      pBlocks2[QP2 + I] := pBlocksDeadLock[I];
-      pBlocksDeadLock[I] := 0;
-    end;
   end;
 
   car1.Visible := false;
-
-  for I := QCar downto 1 do
-    begin
-      if I = QCar then
-      begin
-        Block12.Caption := IntToStr(pBlocksDeadLock[I]);
-        Block12.Visible := false;
-      end
-      else
-      begin
-        Block11.Caption := IntToStr(pBlocksDeadLock[I]);
-        Block11.Visible := false;
-      end;
-    end;
 
   for I := 1 to 5 do
     if pBlocks2[I] <> I then
@@ -359,7 +294,6 @@ var
 begin
   RightButton.Enabled := false;
   MinusWagonButton.Enabled := false;
-  PlusWagonButton.Enabled := false;
   LeftButton.Enabled := true;
   Button1.Enabled := true;
 

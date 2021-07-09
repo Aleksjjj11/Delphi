@@ -11,6 +11,7 @@ object Form1: TForm1
   Font.Name = 'Tahoma'
   Font.Style = []
   OldCreateOrder = False
+  OnCreate = FormCreate
   PixelsPerInch = 96
   TextHeight = 13
   object Image1: TImage
@@ -218,6 +219,7 @@ object Form1: TForm1
     Height = 33
     Caption = #1051
     TabOrder = 4
+    OnClick = LeftButtonClick
   end
   object RightButton: TButton
     Left = 128
@@ -237,6 +239,7 @@ object Form1: TForm1
     Caption = '(+) '#1055#1086#1076#1094#1077#1087#1080#1090#1100' '#1074#1072#1075#1086#1085
     Enabled = False
     TabOrder = 6
+    OnClick = PlusWagonButtonClick
   end
   object MinusWagonButton: TButton
     Left = 224
@@ -246,6 +249,7 @@ object Form1: TForm1
     Caption = '(-) '#1054#1090#1094#1077#1087#1080#1090#1100' '#1074#1072#1075#1086#1085
     Enabled = False
     TabOrder = 7
+    OnClick = MinusWagonButtonClick
   end
   object LoopButton: TButton
     Left = 368
@@ -272,7 +276,7 @@ object Form1: TForm1
     TabOrder = 9
   end
   object Block2: TPanel
-    Left = 112
+    Left = 121
     Top = 47
     Width = 65
     Height = 41
@@ -349,6 +353,7 @@ object Form1: TForm1
     ParentBackground = False
     ParentFont = False
     TabOrder = 14
+    Visible = False
   end
   object Block7: TPanel
     Left = 112
@@ -364,6 +369,7 @@ object Form1: TForm1
     ParentBackground = False
     ParentFont = False
     TabOrder = 15
+    Visible = False
   end
   object Block8: TPanel
     Left = 192
@@ -379,6 +385,7 @@ object Form1: TForm1
     ParentBackground = False
     ParentFont = False
     TabOrder = 16
+    Visible = False
   end
   object Block9: TPanel
     Left = 263
@@ -394,10 +401,11 @@ object Form1: TForm1
     ParentBackground = False
     ParentFont = False
     TabOrder = 17
+    Visible = False
   end
   object Block10: TPanel
     Left = 334
-    Top = 207
+    Top = 212
     Width = 65
     Height = 41
     Color = clPurple
@@ -409,6 +417,7 @@ object Form1: TForm1
     ParentBackground = False
     ParentFont = False
     TabOrder = 18
+    Visible = False
   end
   object Block11: TPanel
     Left = 736
@@ -424,10 +433,11 @@ object Form1: TForm1
     ParentBackground = False
     ParentFont = False
     TabOrder = 19
+    Visible = False
   end
   object Block12: TPanel
     Left = 816
-    Top = 207
+    Top = 212
     Width = 65
     Height = 41
     Color = clPurple
@@ -439,10 +449,11 @@ object Form1: TForm1
     ParentBackground = False
     ParentFont = False
     TabOrder = 20
+    Visible = False
   end
   object Car1: TPanel
     Left = 896
-    Top = 207
+    Top = 212
     Width = 65
     Height = 41
     Color = clGreen
@@ -469,6 +480,7 @@ object Form1: TForm1
     ParentBackground = False
     ParentFont = False
     TabOrder = 22
+    Visible = False
   end
   object Car3: TPanel
     Left = 416
@@ -484,6 +496,7 @@ object Form1: TForm1
     ParentBackground = False
     ParentFont = False
     TabOrder = 23
+    Visible = False
   end
   object SaveButton: TButton
     Left = 944
@@ -493,12 +506,29 @@ object Form1: TForm1
     Caption = #1057#1086#1093#1088#1072#1085#1080#1090#1100
     TabOrder = 24
   end
-  object Button2: TButton
+  object ResetButton: TButton
     Left = 976
     Top = 16
     Width = 83
     Height = 33
-    Caption = 'Button2'
+    Caption = #1057#1073#1088#1086#1089
     TabOrder = 25
+    OnClick = ResetButtonClick
+  end
+  object MinLoop: TEdit
+    Left = 456
+    Top = 390
+    Width = 49
+    Height = 21
+    NumbersOnly = True
+    TabOrder = 26
+  end
+  object MaxLoop: TEdit
+    Left = 511
+    Top = 390
+    Width = 49
+    Height = 21
+    NumbersOnly = True
+    TabOrder = 27
   end
 end

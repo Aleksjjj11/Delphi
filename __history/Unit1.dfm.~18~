@@ -219,6 +219,7 @@ object Form1: TForm1
     Height = 33
     Caption = #1051
     TabOrder = 4
+    OnClick = LeftButtonClick
   end
   object RightButton: TButton
     Left = 128
@@ -450,7 +451,7 @@ object Form1: TForm1
   end
   object Car1: TPanel
     Left = 896
-    Top = 207
+    Top = 212
     Width = 65
     Height = 41
     Color = clGreen
@@ -510,5 +511,24 @@ object Form1: TForm1
     Height = 33
     Caption = #1057#1073#1088#1086#1089
     TabOrder = 25
+    OnClick = ResetButtonClick
+  end
+  object MinLoop: TEdit
+    Left = 456
+    Top = 390
+    Width = 49
+    Height = 21
+    NumbersOnly = True
+    TabOrder = 26
+    Text = 'MinLoop'
+  end
+  object MaxLoop: TEdit
+    Left = 511
+    Top = 390
+    Width = 49
+    Height = 21
+    NumbersOnly = True
+    TabOrder = 27
+    Text = 'MaxLoop'
   end
 end

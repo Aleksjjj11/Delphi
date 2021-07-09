@@ -219,6 +219,7 @@ object Form1: TForm1
     Height = 33
     Caption = #1051
     TabOrder = 4
+    OnClick = LeftButtonClick
   end
   object RightButton: TButton
     Left = 128
@@ -238,6 +239,7 @@ object Form1: TForm1
     Caption = '(+) '#1055#1086#1076#1094#1077#1087#1080#1090#1100' '#1074#1072#1075#1086#1085
     Enabled = False
     TabOrder = 6
+    OnClick = PlusWagonButtonClick
   end
   object MinusWagonButton: TButton
     Left = 224
@@ -247,6 +249,7 @@ object Form1: TForm1
     Caption = '(-) '#1054#1090#1094#1077#1087#1080#1090#1100' '#1074#1072#1075#1086#1085
     Enabled = False
     TabOrder = 7
+    OnClick = MinusWagonButtonClick
   end
   object LoopButton: TButton
     Left = 368
@@ -273,7 +276,7 @@ object Form1: TForm1
     TabOrder = 9
   end
   object Block2: TPanel
-    Left = 112
+    Left = 121
     Top = 47
     Width = 65
     Height = 41
@@ -402,7 +405,7 @@ object Form1: TForm1
   end
   object Block10: TPanel
     Left = 334
-    Top = 207
+    Top = 212
     Width = 65
     Height = 41
     Color = clPurple
@@ -421,7 +424,7 @@ object Form1: TForm1
     Top = 207
     Width = 65
     Height = 41
-    Color = clPurple
+    Color = clNavy
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWhite
     Font.Height = -11
@@ -434,10 +437,10 @@ object Form1: TForm1
   end
   object Block12: TPanel
     Left = 816
-    Top = 207
+    Top = 212
     Width = 65
     Height = 41
-    Color = clPurple
+    Color = clNavy
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWhite
     Font.Height = -11
@@ -450,7 +453,7 @@ object Form1: TForm1
   end
   object Car1: TPanel
     Left = 896
-    Top = 207
+    Top = 212
     Width = 65
     Height = 41
     Color = clGreen
@@ -519,7 +522,6 @@ object Form1: TForm1
     Height = 21
     NumbersOnly = True
     TabOrder = 26
-    Text = 'MinLoop'
   end
   object MaxLoop: TEdit
     Left = 511
@@ -528,6 +530,5 @@ object Form1: TForm1
     Height = 21
     NumbersOnly = True
     TabOrder = 27
-    Text = 'MaxLoop'
   end
 end

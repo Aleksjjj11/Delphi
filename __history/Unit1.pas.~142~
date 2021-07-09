@@ -359,7 +359,6 @@ var
 begin
   RightButton.Enabled := false;
   MinusWagonButton.Enabled := false;
-  PlusWagonButton.Enabled := false;
   LeftButton.Enabled := true;
   Button1.Enabled := true;
 

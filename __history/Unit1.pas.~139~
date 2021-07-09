@@ -101,28 +101,23 @@ begin
     begin
       case QP1 + I of
         1:begin
-          Block1.Color := clNavy;
           Block1.Visible := true;
           Block1.Caption := IntToStr(pBlocksDeadLock[I]);
         end;
 
         2:begin
-          Block2.Color := clNavy;
           Block2.Visible := true;
           Block2.Caption := IntToStr(pBlocksDeadLock[I]);
         end;
         3:begin
-          Block3.Color := clNavy;
           Block3.Visible := true;
           Block3.Caption := IntToStr(pBlocksDeadLock[I]);
         end;
         4:begin
-          Block4.Color := clNavy;
           Block4.Visible := true;
           Block4.Caption := IntToStr(pBlocksDeadLock[I]);
         end;
         5:begin
-          Block5.Color := clNavy;
           Block5.Visible := true;
           Block5.Caption := IntToStr(pBlocksDeadLock[I]);
         end;
@@ -143,28 +138,23 @@ begin
     begin
       case QP2 + I of
         1:begin
-          Block6.Color := clNavy;
           Block6.Visible := true;
           Block6.Caption := IntToStr(pBlocksDeadLock[I]);
         end;
 
         2:begin
-          Block7.Color := clNavy;
           Block7.Visible := true;
           Block7.Caption := IntToStr(pBlocksDeadLock[I]);
         end;
         3:begin
-          Block8.Color := clNavy;
           Block8.Visible := true;
           Block8.Caption := IntToStr(pBlocksDeadLock[I]);
         end;
         4:begin
-          Block9.Color := clNavy;
           Block9.Visible := true;
           Block9.Caption := IntToStr(pBlocksDeadLock[I]);
         end;
         5:begin
-          Block10.Color := clNavy;
           Block10.Visible := true;
           Block10.Caption := IntToStr(pBlocksDeadLock[I]);
         end;
@@ -359,7 +349,6 @@ var
 begin
   RightButton.Enabled := false;
   MinusWagonButton.Enabled := false;
-  PlusWagonButton.Enabled := false;
   LeftButton.Enabled := true;
   Button1.Enabled := true;
 

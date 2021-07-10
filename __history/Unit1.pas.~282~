@@ -41,6 +41,8 @@ type
     MaxLoop: TEdit;
     ListBox1: TListBox;
     ListBox2: TListBox;
+    ModeCheckBox: TCheckBox;
+    ExecuteButton: TButton;
     procedure Button1Click(Sender: TObject);
     procedure RightButtonClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
@@ -49,9 +51,14 @@ type
     procedure PlusWagonButtonClick(Sender: TObject);
     procedure MinusWagonButtonClick(Sender: TObject);
     procedure LoopButtonClick(Sender: TObject);
+    procedure ModeCheckBoxClick(Sender: TObject);
+    procedure ExecuteButtonClick(Sender: TObject);
+    procedure SaveButtonClick(Sender: TObject);
   private
     { Private declarations }
-    //procedure CheckEnableLoop();
+    needLogCommands : boolean;
+    isExecuting : boolean;
+    hasError : boolean;
   public
     { Public declarations }
     pBlocks1 : Array[1..5] of integer;
@@ -68,12 +75,58 @@ implementation
 
 procedure TForm1.Button1Click(Sender: TObject);
 begin
-  ListBox1.Items.Add('С');
-  if Sender <> nil then
-    ListBox2.Items.AddPair(IntToStr(ListBox2.Count+1), 'C');
+  if needLogCommands then
+  begin
+    ListBox1.Items.Add('C');
+    if Sender <> nil then
+      ListBox2.Items.AddPair(IntToStr(ListBox2.Count+1), 'C');
+  end;
+
+  ModeCheckBox.Enabled := false;
+
+  if (ModeCheckBox.Checked = false) and (isExecuting = false) then
+    exit;
 
   Image1.Visible := not Image1.Visible;
   Image3.Visible := not Image3.Visible;
+end;
+
+procedure TForm1.ExecuteButtonClick(Sender: TObject);
+var I : integer;
+begin
+  needLogCommands := false;
+  isExecuting := true;
+
+  for I := 0 to ListBox1.Count - 1 do
+  begin
+    if ListBox1.Items[I] = '+' then PlusWagonButtonClick(nil)
+    else if ListBox1.Items[I] = '-' then MinusWagonButtonClick(nil)
+    else if ListBox1.Items[I] = 'Л' then LeftButtonClick(nil)
+    else if ListBox1.Items[I] = 'П' then RightButtonClick(nil)
+    else if ListBox1.Items[I] = 'C' then Button1Click(nil);
+
+    if hasError then
+    begin
+      ShowMessage('Произошла ошибка при выполнении действия под номером ' + I + ', программа остановлена');
+      Break;
+    end;
+
+    Sleep(200);
+  end;
+
+  needLogCommands := true;
+  isExecuting := false;
+
+  PlusWagonButton.Enabled := false;
+  MinusWagonButton.Enabled := false;
+  LeftButton.Enabled := false;
+  RightButton.Enabled := false;
+  ResetButton.Enabled := false;
+  LoopButton.Enabled := false;
+  ExecuteButton.Enabled := false;
+
+  if hasError = false then
+    ShowMessage('Программа выполнена, вы можете сохранить программу, либо написать новую нажав кнопку "Сброс"');
 end;
 
 procedure TForm1.FormCreate(Sender: TObject);
@@ -86,14 +139,33 @@ begin
   QP1 := 5;
   QP2 := 0;
   QCar := 0;
+
+  needLogCommands := true;
+  isExecuting := false;
 end;
 
 procedure TForm1.LeftButtonClick(Sender: TObject);
 var
   I: Integer;
 begin
-  ListBox1.Items.Add('Л');
-  ListBox2.Items.AddPair(IntToStr(ListBox2.Count+1), 'Л');
+
+  if needLogCommands then
+  begin
+    ListBox1.Items.Add('Л');
+    if Sender <> nil then
+      ListBox2.Items.AddPair(IntToStr(ListBox2.Count+1), 'Л');
+  end;
+
+  ModeCheckBox.Enabled := false;
+
+  if (ModeCheckBox.Checked = false) and (isExecuting = false) then
+    exit;
+
+  if (car2.Visible) or (car3.Visible) then
+  begin
+    hasError := true;
+    exit;
+  end;
 
   RightButton.Enabled := true;
   MinusWagonButton.Enabled := true;
@@ -214,7 +286,6 @@ begin
 end;
 
 procedure TForm1.LoopButtonClick(Sender: TObject);
-var str : string;
 var I : integer;
 begin
   for I := StrToInt(minLoop.Text) to StrToInt(maxLoop.Text) do
@@ -224,16 +295,24 @@ begin
     if ListBox1.Items[I] = 'Л' then LeftButtonClick(nil);
     if ListBox1.Items[I] = 'П' then RightButtonClick(nil);
     if ListBox1.Items[I] = 'C' then Button1Click(nil);
-    end;
+  end;
 
   ListBox2.Items.AddPair(IntToStr(ListBox2.Count+1), 'Ц' + ' ' + minLoop.Text + ' ' + maxLoop.Text);
 end;
 
 procedure TForm1.MinusWagonButtonClick(Sender: TObject);
 begin
-  ListBox1.Items.Add('-');
-  if Sender <> nil then
-    ListBox2.Items.AddPair(IntToStr(ListBox2.Count+1), '-');
+  if needLogCommands then
+  begin
+    ListBox1.Items.Add('-');
+    if Sender <> nil then
+      ListBox2.Items.AddPair(IntToStr(ListBox2.Count+1), '-');
+  end;
+
+  ModeCheckBox.Enabled := false;
+
+  if (ModeCheckBox.Checked = false) and (isExecuting = false) then
+    exit;
 
   if Car2.Visible then
   begin
@@ -251,7 +330,12 @@ begin
         end;
       end
       else
-         ShowMessage('Ты дебил');
+      begin
+        ShowMessage('Дествие невозможно выполнить');
+        hasError := true;
+        exit;
+      end;
+
   end
   else
   begin
@@ -273,10 +357,34 @@ begin
   end;
 end;
 
+procedure TForm1.ModeCheckBoxClick(Sender: TObject);
+begin
+  ExecuteButton.Enabled := not ModeCheckBox.Checked;
+
+  if ModeCheckBox.Checked = false then
+  begin
+    PlusWagonButton.Enabled := true;
+    MinusWagonButton.Enabled := true;
+    ResetButton.Enabled := true;
+    LeftButton.Enabled := true;
+    RightButton.Enabled := true;
+    LoopButton.Enabled := true;
+  end;
+end;
+
 procedure TForm1.PlusWagonButtonClick(Sender: TObject);
 begin
-  ListBox1.Items.Add('+');
-  ListBox2.Items.AddPair(IntToStr(ListBox2.Count+1), '+');
+  if needLogCommands then
+  begin
+    ListBox1.Items.Add('+');
+    if Sender <> nil then
+      ListBox2.Items.AddPair(IntToStr(ListBox2.Count+1), '+');
+  end;
+
+  ModeCheckBox.Enabled := false;
+
+  if (ModeCheckBox.Checked = false) and (isExecuting = false) then
+    exit;
 
   if Car2.Visible then
   begin
@@ -384,14 +492,39 @@ begin
   RightButton.Enabled := false;
   LeftButton.Enabled := true;
   Button1.Enabled := true;
+
+  ListBox1.Items.Clear();
+  ListBox2.Items.Clear();
+
+  ModeCheckBox.Enabled := true;
+  ModeCheckBox.Checked := true;
+
+  ExecuteButton.Enabled := false;
+
+  hasError := false;
 end;
 
 procedure TForm1.RightButtonClick(Sender: TObject);
 var
   I: Integer;
 begin
-  ListBox1.Items.Add('П');
-  ListBox2.Items.AddPair(IntToStr(ListBox2.Count+1), 'П');
+  if needLogCommands then
+  begin
+    ListBox1.Items.Add('П');
+    if Sender <> nil then
+      ListBox2.Items.AddPair(IntToStr(ListBox2.Count+1), 'П');
+  end;
+
+  ModeCheckBox.Enabled := false;
+
+  if (ModeCheckBox.Checked = false) and (isExecuting = false) then
+    exit;
+
+  if car1.Visible then
+  begin
+    hasError := true;
+    exit;
+  end;
 
   RightButton.Enabled := false;
   MinusWagonButton.Enabled := false;
@@ -451,6 +584,12 @@ begin
         Block11.Visible := true;
       end;
     end;
+end;
+
+procedure TForm1.SaveButtonClick(Sender: TObject);
+begin
+  ListBox2.Items.SaveToFile('Save.txt');
+  ShowMessage('Сохранено');
 end;
 
 end.

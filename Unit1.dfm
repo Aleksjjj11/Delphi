@@ -503,9 +503,10 @@ object Form1: TForm1
     Left = 944
     Top = 336
     Width = 100
-    Height = 120
+    Height = 65
     Caption = #1057#1086#1093#1088#1072#1085#1080#1090#1100
     TabOrder = 24
+    OnClick = SaveButtonClick
   end
   object ResetButton: TButton
     Left = 976
@@ -547,5 +548,26 @@ object Form1: TForm1
     Height = 144
     ItemHeight = 13
     TabOrder = 29
+  end
+  object ModeCheckBox: TCheckBox
+    Left = 883
+    Top = 423
+    Width = 161
+    Height = 17
+    Caption = #1042#1099#1087#1086#1083#1085#1103#1090#1100' '#1082#1086#1084#1072#1085#1076#1099' '#1089#1088#1072#1079#1091'?'
+    Checked = True
+    State = cbChecked
+    TabOrder = 30
+    OnClick = ModeCheckBoxClick
+  end
+  object ExecuteButton: TButton
+    Left = 883
+    Top = 455
+    Width = 161
+    Height = 25
+    Caption = #1042#1099#1087#1086#1083#1085#1080#1090#1100
+    Enabled = False
+    TabOrder = 31
+    OnClick = ExecuteButtonClick
   end
 end

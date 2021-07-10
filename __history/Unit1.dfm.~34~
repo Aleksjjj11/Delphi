@@ -258,6 +258,7 @@ object Form1: TForm1
     Height = 25
     Caption = #1062#1080#1082#1083':'
     TabOrder = 8
+    OnClick = LoopButtonClick
   end
   object Block1: TPanel
     Left = 32
@@ -424,7 +425,7 @@ object Form1: TForm1
     Top = 207
     Width = 65
     Height = 41
-    Color = clPurple
+    Color = clNavy
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWhite
     Font.Height = -11
@@ -440,7 +441,7 @@ object Form1: TForm1
     Top = 212
     Width = 65
     Height = 41
-    Color = clPurple
+    Color = clNavy
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWhite
     Font.Height = -11
@@ -502,7 +503,7 @@ object Form1: TForm1
     Left = 944
     Top = 336
     Width = 100
-    Height = 120
+    Height = 65
     Caption = #1057#1086#1093#1088#1072#1085#1080#1090#1100
     TabOrder = 24
   end
@@ -530,5 +531,40 @@ object Form1: TForm1
     Height = 21
     NumbersOnly = True
     TabOrder = 27
+  end
+  object ListBox1: TListBox
+    Left = 584
+    Top = 336
+    Width = 97
+    Height = 144
+    ItemHeight = 13
+    TabOrder = 28
+  end
+  object ListBox2: TListBox
+    Left = 712
+    Top = 336
+    Width = 97
+    Height = 144
+    ItemHeight = 13
+    TabOrder = 29
+  end
+  object ModeCheckBox: TCheckBox
+    Left = 883
+    Top = 423
+    Width = 161
+    Height = 17
+    Caption = #1042#1099#1087#1086#1083#1085#1103#1090#1100' '#1082#1086#1084#1072#1085#1076#1099' '#1089#1088#1072#1079#1091'?'
+    Checked = True
+    State = cbChecked
+    TabOrder = 30
+  end
+  object ExecuteButton: TButton
+    Left = 883
+    Top = 455
+    Width = 161
+    Height = 25
+    Caption = #1042#1099#1087#1086#1083#1085#1080#1090#1100
+    Enabled = False
+    TabOrder = 31
   end
 end
